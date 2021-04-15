@@ -62,7 +62,7 @@ class HDC1080 {
         static const byte DEVICE_ID_REGISTER_ADDR       = 0xFF;
 
 
-        static const int CONFIGURATION_REGISTER_UPDATE_PERIOD = 250;
+        static const int CONFIGURATION_REGISTER_UPDATE_PERIOD = 1000;
 };
 
 

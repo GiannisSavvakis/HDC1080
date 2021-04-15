@@ -92,15 +92,13 @@ float HDC1080::getHumidity() {
 
 
 void HDC1080::update() {
-    unsigned long long int m = millis();
-
-    if((_heatUpPeriod > 0) && (m - _heatUpTimer >= _heatUpPeriod)) {
+    if((_heatUpPeriod > 0) && (millis() - _heatUpTimer >= _heatUpPeriod)) {
         _heatUpPeriod = 0;
 
         this->stopHeatingUp();
     }
 
-    if(m - _configurationRegisterTimer >= HDC1080::CONFIGURATION_REGISTER_UPDATE_PERIOD) {
+    if(millis() - _configurationRegisterTimer >= HDC1080::CONFIGURATION_REGISTER_UPDATE_PERIOD) {
         Wire.beginTransmission(_address);
             Wire.write(HDC1080::CONFIGURATION_REGISTER_ADDR);
             Wire.write((byte)(_configurationRegister >> 8));
@@ -115,11 +113,12 @@ void HDC1080::update() {
         _configurationRegisterTimer = _timer;
     }
 
-    if(m - _timer >= _period) {
+    if(millis()-_timer >= _period) {
         Wire.requestFrom(_address, (byte)4);
 
         _temperatureRaw = 0;
         _humidityRaw = 0;
+		uint16_t temp = 0, hum = 0;
 
         _temperatureRaw |= (byte)Wire.read();
         _temperatureRaw <<= 8;
