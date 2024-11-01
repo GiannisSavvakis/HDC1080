@@ -1,5 +1,2 @@
 # HDC1080
-Βιβλιοθήκη για τον HDC1080 (αισθητήρας Θερμοκρασίας &amp; Υγρασίας).
-
-# v0.0.1
-Fixed something...
+An Arduino Library for HDC1080 (Temperature & Humidity Sensor).
